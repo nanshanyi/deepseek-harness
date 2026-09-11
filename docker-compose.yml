@@ -1,9 +1,6 @@
 services:
   deepseek-harness:
-    build:
-      context: .
-      platforms: [linux/amd64]
-    image: deepseek-harness:local-amd64
+    image: ghcr.io/nanshanyi/deepseek-harness:latest
     platform: linux/amd64
     restart: unless-stopped
     ports:
