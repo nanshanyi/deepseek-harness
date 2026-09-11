@@ -15,5 +15,5 @@ RUN mkdir -p /data /workspace && chown -R dsh:dsh /data /workspace
 USER dsh
 EXPOSE 3080
 VOLUME ["/data", "/workspace"]
-ENTRYPOINT ["/app/node_modules/.bin/dsh"]
+ENTRYPOINT ["node", "/app/apps/cli/lib/bin.js"]
 CMD ["--profile", "web", "--no-open", "--host", "0.0.0.0", "--port", "3080"]
