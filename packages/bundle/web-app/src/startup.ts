@@ -56,7 +56,7 @@ function webCommand(): Command {
 Examples:
   dsh --profile web                          serve on the composed host and port
   dsh --profile web --no-open                serve without opening a browser
-  dsh --profile web --port 8080              serve on another port
+  dsh --profile web --port 3080              serve on another port
 `)
 }
 
@@ -71,8 +71,8 @@ export function apply(ctx: Context): void {
   const program = webCommand()
   program.action(() => {
     const options = program.opts<WebOptions>()
-    if (options.host === '0.0.0.0') {
-      program.error('error: --host 0.0.0.0 is intentionally not supported yet for safety: it would expose remote code execution to the network; use 127.0.0.1 instead')
+    if (options.host === '0.0.0.0' && process.env.DSH_ALLOW_NETWORK !== '1') {
+      program.error('error: --host 0.0.0.0 requires DSH_ALLOW_NETWORK=1; this exposes the Web UI to the network')
     }
     if (options.port !== undefined && !/^\d+$/.test(options.port)) {
       program.error(`error: --port must be a number, got ${JSON.stringify(options.port)}`)
