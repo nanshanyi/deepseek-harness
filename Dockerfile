@@ -1,15 +1,8 @@
 FROM node:22-bookworm AS build
 WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@11.7.0 --activate
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig*.json tsdown.config.ts ./
-COPY .git ./.git
+COPY . .
 RUN rm -f .git/config.worktree
-COPY apps ./apps
-COPY packages ./packages
-COPY native ./native
-COPY scripts ./scripts
-COPY vendor ./vendor
-COPY patches ./patches
 RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 
