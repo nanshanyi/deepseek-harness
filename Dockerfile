@@ -7,6 +7,7 @@ COPY packages ./packages
 COPY native ./native
 COPY scripts ./scripts
 COPY vendor ./vendor
+COPY patches ./patches
 RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 
