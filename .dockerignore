@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+**/node_modules
+lib
+dist
+coverage
+.cache
+.sessions
+.storages
+*.tsbuildinfo
+Dockerfile
+docker-compose*.yml

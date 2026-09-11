@@ -1,0 +1,20 @@
+services:
+  deepseek-harness:
+    image: ghcr.io/nanshanyi/deepseek-harness:latest
+    platform: linux/amd64
+    restart: unless-stopped
+    ports:
+      - "3080:3080"
+    environment:
+      DSH_ALLOW_NETWORK: "1"
+      DSH_HOME: /data
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:?set DEEPSEEK_API_KEY in .env}
+    volumes:
+      - ./data:/data
+      - ./workspace:/workspace
+    working_dir: /workspace
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3080/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
