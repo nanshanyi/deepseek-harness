@@ -9,10 +9,8 @@ RUN pnpm run build
 FROM node:22-bookworm-slim AS runtime
 ENV NODE_ENV=production DSH_HOME=/data
 WORKDIR /app
-RUN groupadd --system dsh && useradd --system --gid dsh --home-dir /data dsh
-COPY --from=build --chown=dsh:dsh /app /app
-RUN mkdir -p /data /workspace && chown -R dsh:dsh /data /workspace
-USER dsh
+COPY --from=build /app /app
+RUN mkdir -p /data /workspace
 EXPOSE 3080
 VOLUME ["/data", "/workspace"]
 ENTRYPOINT ["node", "/app/apps/cli/lib/bin.js"]

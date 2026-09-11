@@ -1,7 +1,6 @@
 services:
   deepseek-harness:
     image: ghcr.io/nanshanyi/deepseek-harness:latest
-    user: "0:0"
     platform: linux/amd64
     restart: unless-stopped
     ports:
