@@ -26,7 +26,7 @@ jobs:
         with:
           images: ghcr.io/nanshanyi/deepseek-harness
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest
             type=ref,event=tag
             type=sha
       - uses: docker/build-push-action@v6
